@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Upload Form</h2>
+  <form id="uploadForm">
+    <input name="title" placeholder="Title" required><br><br>
+    <input name="brand" placeholder="Brand Name" required><br><br>
+    <textarea name="description" placeholder="Description"></textarea><br><br>
+<h3>Image here</h3>
+<input type="file" name="image" accept="image/*"><br><br>
+
+<h3>Video here</h3>
+<input type="file" name="video" accept="video/*"><br><br>
+
+<h3>Model here</h3>
+<input type="file" name="model" accept=".glb,.obj,.fbx"><br><br>
+
+    <button type="submit">Upload</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const res = await fetch("http://localhost:3000/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      console.log(data);
+      alert("Upload Complete!");
+    });
+  </script>
+</body>
+</html>
